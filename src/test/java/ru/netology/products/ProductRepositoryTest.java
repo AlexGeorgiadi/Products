@@ -55,4 +55,12 @@ public class ProductRepositoryTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldNotFindAnyProducts() {
+        Product[] expected = new Product[]{};
+        Product[] actual = manager.searchBy("T-Shirt");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
