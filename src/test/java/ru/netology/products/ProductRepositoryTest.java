@@ -63,4 +63,40 @@ public class ProductRepositoryTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldFindById() {
+        Product[] expected = new Product[]{product4};
+        Product[] actual = new Product[]{repository.findById(4)};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindByAbsentId() {
+        Product[] expected = new Product[]{null};
+        Product[] actual = new Product[]{repository.findById(10)};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldRemoveFirstProduct() {
+
+        repository.removeById(1);
+
+        Product[] expected = new Product[]{product2, product3, product4, product5};
+        Product[] actual = repository.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotRemoveAbsentId() {
+
+        Assertions.assertThrows(NotFoundException.class, () ->
+        {
+            repository.removeById(100);
+        });
+    }
+
 }
